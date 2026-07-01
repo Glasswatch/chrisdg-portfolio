@@ -530,6 +530,9 @@ nav ul li a:hover {
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.05);
   transition: all 0.3s ease;
+  overflow-wrap: break-word; /* Allows long words/links to break onto a new line */
+  word-wrap: break-word; /* Legacy support for older browsers */
+  word-break: break-word; /* Forces rigid strings to break instead of overflowing */
 }
 
 .contact-card:hover {
@@ -692,5 +695,16 @@ footer p {
     right: 20px;
     top: 20px;
     font-size: 35px;
+  }
+}
+@media (max-width: 768px) {
+  /* ... your other 768px mobile code ... */
+
+  .contact-card h3 {
+    font-size: 20px; /* Gently scales down headings inside the cards */
+  }
+
+  .contact-card p {
+    font-size: 15px; /* Ensures paragraphs stay readable and tight */
   }
 }
