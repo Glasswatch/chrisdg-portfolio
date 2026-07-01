@@ -1,6 +1,10 @@
+/* ==========================================================================
+   GLOBAL STYLES & RESET
+   ========================================================================== */
 html {
   scroll-behavior: smooth;
 }
+
 * {
   margin: 0;
   padding: 0;
@@ -9,8 +13,14 @@ html {
 
 body {
   font-family: "Didot", "Bodoni MT", "Cinzel", serif;
+  background-color: #ffffff;
+  overflow-x: hidden; /* Prevent horizontal scrollbars completely */
+  width: 100%;
 }
 
+/* ==========================================================================
+   NAVIGATION
+   ========================================================================== */
 nav {
   position: sticky;
   top: 0;
@@ -18,7 +28,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 80px;
+  padding: 20px 5%; /* Fluid percentage padding */
   background: #111827;
 }
 
@@ -30,6 +40,7 @@ nav ul {
   display: flex;
   list-style: none;
 }
+
 nav ul li {
   margin-left: 30px;
 }
@@ -37,23 +48,27 @@ nav ul li {
 nav ul li a {
   color: white;
   text-decoration: none;
+  transition: color 0.3s;
 }
 
 nav ul li a:hover {
   color: #38bdf8;
 }
 
+/* ==========================================================================
+   HERO SECTION
+   ========================================================================== */
 .hero {
   height: 90vh;
-  position: relative; /* CRITICAL: Keeps the dark overlay inside the hero section */
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-
-  color: #ffffff; /* Ensures default text color is crisp white */
+  color: #ffffff;
   overflow: hidden;
 }
+
 .hero::before {
   content: "";
   position: absolute;
@@ -66,6 +81,7 @@ nav ul li a:hover {
   transform: scale(1.05);
   z-index: 1;
 }
+
 .hero::after {
   content: "";
   position: absolute;
@@ -73,36 +89,43 @@ nav ul li a:hover {
   background: linear-gradient(rgba(10, 17, 32, 0.75), rgba(10, 17, 32, 0.6));
   z-index: 2;
 }
+
 .hero-text {
   position: relative;
-  /* Push the text z-index to 3 so it sits entirely above the blurred image and dark tint */
   z-index: 3;
+  width: 100%;
   max-width: 800px;
   padding: 0 20px;
 }
+
 .hero h1 {
-  font-size: 55px;
+  font-size: clamp(
+    32px,
+    5vw,
+    55px
+  ); /* Dynamically scales between 32px and 55px */
   font-weight: 700;
   letter-spacing: -1px;
-  color: #ffffff;
 }
+
 .hero h1 .highlight {
-  color: #d1da82; /* A slightly brighter, vibrant blue */
+  color: #d1da82;
 }
 
 .hero h2 {
-  font-size: 24px;
+  font-size: clamp(18px, 3vw, 24px);
   margin-top: 15px;
-  color: #93c5fd; /* Soft, light blue so it stands out but doesn't fight the H1 */
+  color: #93c5fd;
   font-weight: 500;
 }
 
 .hero p {
-  max-width: 650px; /* Using max-width is safer for responsive screens than fixed width */
+  max-width: 650px;
+  width: 100%;
   margin: 25px auto 35px auto;
   line-height: 1.8;
-  color: #cbd5e1; /* Smooth slate gray/white for excellent readability */
-  font-size: 18px;
+  color: #cbd5e1;
+  font-size: clamp(15px, 2vw, 18px);
 }
 
 .hero button {
@@ -114,6 +137,8 @@ nav ul li a:hover {
   font-size: 18px;
   font-weight: 600;
   border-radius: 8px;
+  border: none;
+  cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
 }
@@ -123,41 +148,39 @@ nav ul li a:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
 }
+
 .hero button a {
   text-decoration: none;
-
   color: white;
-
-  padding: 12px 20px;
-
-  border-radius: 8px;
-
-  transition: 0.3s;
 }
 
+/* ==========================================================================
+   ABOUT SECTION
+   ========================================================================== */
 .about {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 60px;
-
-  padding: 100px 80px;
-
+  padding: 100px 5%;
   background: #f9fafb;
 }
 
 .about-image img {
-  width: 300px;
+  width: 100%;
+  max-width: 300px; /* Scales down fluidly below 300px */
+  height: auto;
   border-radius: 20px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
 .about-content {
+  width: 100%;
   max-width: 600px;
 }
 
 .about-content h2 {
-  font-size: 40px;
+  font-size: clamp(28px, 4vw, 40px);
   margin-bottom: 20px;
 }
 
@@ -166,64 +189,65 @@ nav ul li a:hover {
   line-height: 1.8;
   color: #555;
 }
+
 .about-content a {
+  display: inline-block;
   text-decoration: none;
-
   background: #2563eb;
-
   color: white;
-
   padding: 12px 20px;
-
   border-radius: 8px;
-
   transition: 0.3s;
 }
+
 .about-content a:hover {
-  background: #1d4ed8; /* A slightly darker blue on hover */
-  transform: translateY(-2px); /* Subtle lift effect */
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2); /* Soft glow */
+  background: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
 }
 
+/* ==========================================================================
+   SKILLS SECTION
+   ========================================================================== */
 .skills {
-  padding: 100px 80px;
+  padding: 100px 5%;
   background: #111827;
   text-align: center;
 }
 
 .skills h2 {
   color: white;
-  font-size: 40px;
+  font-size: clamp(28px, 4vw, 40px);
   margin-bottom: 50px;
 }
+
 .skills-grid {
   display: grid;
-
-  grid-template-columns: repeat(3, 1fr);
-
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(280px, 1fr)
+  ); /* Natively responsive grid grid */
   gap: 30px;
+  max-width: 1100px;
+  margin: 0 auto;
 }
+
 .skill-card {
   background: white;
-
   padding: 30px;
-
   border-radius: 15px;
-
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-
   transition: 0.3s;
 }
+
 .skill-card:hover {
   transform: translateY(-10px);
-
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
 }
+
 .skill-card h3 {
   color: #2563eb;
-
   margin-bottom: 15px;
-
   font-size: 24px;
 }
 
@@ -231,101 +255,89 @@ nav ul li a:hover {
   line-height: 1.6;
   color: #555;
 }
-.projects {
-  padding: 100px 80px;
 
+/* ==========================================================================
+   PROJECTS SECTION
+   ========================================================================== */
+.projects {
+  padding: 100px 5%;
   background: white;
 }
 
 .projects h2 {
   text-align: center;
-
-  font-size: 40px;
-
+  font-size: clamp(28px, 4vw, 40px);
   margin-bottom: 60px;
 }
+
 .project-container {
   display: flex;
-
   flex-direction: column;
-
   gap: 50px;
+  max-width: 1000px;
+  margin: 0 auto;
 }
+
 .project-card {
   display: flex;
-
   gap: 40px;
-
   background: #f8f9fa;
-
   border-radius: 20px;
-
   overflow: hidden;
-
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
+
 .project-card img {
-  width: 75%;
-  height: 275px;
+  width: 45%; /* Fixed cutoff issue from 75% width */
+  min-width: 300px;
+  height: auto;
+  min-height: 275px;
   object-fit: cover;
 }
+
 .project-content {
   padding: 30px;
+  flex: 1;
 }
 
 .project-content h3 {
   font-size: 30px;
-
   margin-bottom: 20px;
-
   color: #2563eb;
 }
 
 .project-content p {
   line-height: 1.8;
-
   color: #555;
-
   margin-bottom: 25px;
 }
+
 .tech-stack {
   display: flex;
-
   flex-wrap: wrap;
-
   gap: 10px;
-
   margin-bottom: 25px;
 }
 
 .tech-stack span {
   background: #2563eb;
-
   color: white;
-
   padding: 8px 15px;
-
   border-radius: 30px;
-
   font-size: 14px;
 }
+
 .project-buttons {
   display: flex;
-
   gap: 15px;
 }
 
 .project-buttons a {
   text-decoration: none;
-
   background: #2563eb;
-
   color: white;
-
   padding: 12px 20px;
-
   border-radius: 8px;
-
   transition: 0.3s;
 }
 
@@ -333,11 +345,15 @@ nav ul li a:hover {
   background: #1d4ed8;
 }
 
+/* ==========================================================================
+   ACHIEVEMENTS SECTION
+   ========================================================================== */
 .achievements {
-  padding: 80px 80px 0 80px; /* Remove bottom padding to let the gradient blend */
+  padding: 100px 5% 0 5%;
   background: #ffffff;
   position: relative;
 }
+
 .achievement-fade-bridge {
   height: 100px;
   background: linear-gradient(to bottom, #ffffff, #0f172a);
@@ -346,168 +362,140 @@ nav ul li a:hover {
 
 .achievements h2 {
   text-align: center;
-  font-size: 40px;
+  font-size: clamp(28px, 4vw, 40px);
   margin-bottom: 70px;
   color: black;
 }
+
 .timeline {
   position: relative;
-
   max-width: 900px;
-
   margin: auto;
 }
+
 .timeline::before {
   content: "";
-
   position: absolute;
-
   left: 20px;
-
   top: 0;
-
   width: 4px;
-
   height: 100%;
-
   background: #2563eb;
 }
+
 .timeline-item {
   position: relative;
-
   padding-left: 70px;
-
   margin-bottom: 80px;
 }
+
 .timeline-dot {
   position: absolute;
-
   left: 10px;
-
   width: 24px;
-
   height: 24px;
-
   border-radius: 50%;
-
   background: #2563eb;
-
   border: 5px solid white;
 }
+
 .timeline-content {
-  background: #f8fafc; /* Sleek, very light gray-blue so it pops on pure white */
+  background: white;
   padding: 35px;
   border-radius: 18px;
-  border: 1px solid #e2e8f0; /* Subtle boundary line */
-  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05); /* Softer, dark slate shadow */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
+
 .date {
   color: #2563eb;
-
   font-size: 15px;
-
   font-weight: bold;
 }
 
 .timeline-content h3 {
-  font-size: 32px;
-
+  font-size: clamp(22px, 3vw, 32px);
   margin: 15px 0 10px;
 }
 
 .timeline-content h4 {
   color: #666;
-
   margin-bottom: 20px;
 }
 
 .timeline-content p {
   line-height: 1.9;
-
   color: #555;
+  margin-bottom: 20px;
 }
+
 .achievement-details {
   display: flex;
-
   justify-content: space-between;
-
   align-items: center;
-
   gap: 40px;
 }
+
 .achievement-text {
   flex: 1;
 }
+
 .achievement-photo {
   flex: 0 0 320px;
+  max-width: 100%;
 }
+
 .achievement-photo img {
   width: 100%;
-
   display: block;
-
   border-radius: 12px;
-
   cursor: pointer;
-
   transition: 0.35s;
 }
+
 .achievement-photo img:hover {
   transform: scale(1.03);
 }
-.timeline-content {
-  background: white;
 
-  padding: 35px;
-
-  border-radius: 18px;
-
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-}
+/* ==========================================================================
+   LIGHTBOX
+   ========================================================================== */
 .lightbox {
   display: none;
-
   justify-content: center;
-
   align-items: center;
-
   position: fixed;
-
   inset: 0;
-
   background: rgba(0, 0, 0, 0.9);
-
   z-index: 9999;
 }
+
 .lightbox img {
   max-width: 90%;
-
   max-height: 90%;
-
   border-radius: 15px;
 }
+
 .close {
   position: absolute;
-
   top: 30px;
-
   right: 50px;
-
   color: white;
-
   font-size: 45px;
-
   cursor: pointer;
 }
+
+/* ==========================================================================
+   CONTACT SECTION
+   ========================================================================== */
 .contact {
-  padding: 60px 80px; /* Increased vertical padding for better breathing room */
-  background: #0f172a; /* Deep, premium dark slate background */
-  color: #ffffff; /* Default text color is now crisp white */
+  padding: 80px 5%;
+  background: #0f172a;
+  color: #ffffff;
   text-align: center;
 }
 
 .contact h2 {
-  font-size: 40px;
+  font-size: clamp(28px, 4vw, 40px);
   margin-bottom: 20px;
   font-weight: 700;
   color: #ffffff;
@@ -517,60 +505,129 @@ nav ul li a:hover {
   max-width: 700px;
   margin: 0 auto 40px auto;
   line-height: 1.8;
-  color: #94a3b8; /* Soft, readable muted slate-gray instead of harsh solid gray */
+  color: #94a3b8;
   font-size: 17px;
 }
+
 .contact-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 30px;
   margin-bottom: 40px;
-  max-width: 900px; /* Prevents the grid from stretching too wide on massive screens */
+  max-width: 900px;
   margin-left: auto;
   margin-right: auto;
 }
+
 .contact-card {
-  background: #1e293b; /* Slightly lighter card background so it looks "raised" */
-  padding: 25px; /* More padding inside the cards for a clean layout */
+  background: #1e293b;
+  padding: 25px;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.05); /* Very subtle border for crisp definition */
+  border: 1px solid rgba(255, 255, 255, 0.05);
   transition: all 0.3s ease;
 }
 
 .contact-card:hover {
   transform: translateY(-8px);
-  background: #243249; /* Smoothly lights up the card slightly on hover */
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); /* Adds a deep drop shadow */
+  background: #243249;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
+
 .social-links {
   display: flex;
   justify-content: center;
-  gap: 15px; /* Slightly wider gap */
+  gap: 15px;
 }
+
 .social-links a {
   text-decoration: none;
   color: #ffffff;
-  background: #2563eb; /* Matches your core brand blue */
+  background: #2563eb;
   padding: 12px 24px;
   border-radius: 8px;
   font-weight: 500;
   transition: all 0.3s ease;
   box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
 }
+
 .social-links a:hover {
-  background: #1d4ed8; /* Darker blue on hover */
+  background: #1d4ed8;
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
 }
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
 footer {
-  background: #020617; /* Strong, grounded midnight-black anchor */
-  color: #64748b; /* Muted text so it doesn't distract from the main content */
-  padding: 25px 10px; /* Better vertical breathing room */
+  background: #020617;
+  color: #64748b;
+  padding: 25px 10px;
   text-align: center;
-  border-top: 1px solid rgba(255, 255, 255, 0.05); /* Clean separator line */
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 footer p {
   margin: 5px;
   font-size: 14px;
+}
+
+/* ==========================================================================
+   MEDIA QUERIES (RESPONSIVE DROPDOWNS)
+   ========================================================================== */
+
+@media (max-width: 968px) {
+  .about {
+    flex-direction: column-reverse; /* Stacks layout vertically */
+    text-align: center;
+    gap: 40px;
+  }
+
+  .project-card {
+    flex-direction: column; /* Stacks image above content layout */
+  }
+
+  .project-card img {
+    width: 100%;
+    height: 250px;
+  }
+
+  .achievement-details {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .achievement-photo {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+
+  nav ul li {
+    margin: 0 12px;
+  }
+
+  .contact-container {
+    grid-template-columns: 1fr; /* Stacks cards on mobile phones */
+  }
+
+  .timeline::before {
+    left: 15px;
+  }
+
+  .timeline-item {
+    padding-left: 45px;
+  }
+
+  .timeline-dot {
+    left: 5px;
+  }
 }
