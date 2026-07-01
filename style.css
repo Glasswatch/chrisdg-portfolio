@@ -23,7 +23,7 @@ nav {
 }
 
 nav h2 {
-  color: white;
+  color: #d1da82;
 }
 
 nav ul {
@@ -45,40 +45,94 @@ nav ul li a:hover {
 
 .hero {
   height: 90vh;
+  position: relative; /* CRITICAL: Keeps the dark overlay inside the hero section */
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  background: #f5f5f5;
-}
 
+  color: #ffffff; /* Ensures default text color is crisp white */
+  overflow: hidden;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("images/bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(1px);
+  transform: scale(1.05);
+  z-index: 1;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(10, 17, 32, 0.75), rgba(10, 17, 32, 0.6));
+  z-index: 2;
+}
+.hero-text {
+  position: relative;
+  /* Push the text z-index to 3 so it sits entirely above the blurred image and dark tint */
+  z-index: 3;
+  max-width: 800px;
+  padding: 0 20px;
+}
 .hero h1 {
   font-size: 55px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  color: #ffffff;
+}
+.hero h1 .highlight {
+  color: #d1da82; /* A slightly brighter, vibrant blue */
 }
 
 .hero h2 {
+  font-size: 24px;
   margin-top: 15px;
-  color: #2563eb;
+  color: #93c5fd; /* Soft, light blue so it stands out but doesn't fight the H1 */
+  font-weight: 500;
 }
 
 .hero p {
-  width: 700px;
-  margin: 25px auto;
-  line-height: 1.7;
+  max-width: 650px; /* Using max-width is safer for responsive screens than fixed width */
+  margin: 25px auto 35px auto;
+  line-height: 1.8;
+  color: #cbd5e1; /* Smooth slate gray/white for excellent readability */
+  font-size: 18px;
 }
 
 .hero button {
-  padding: 15px 30px;
-  border: none;
+  display: inline-block;
+  text-decoration: none;
   background: #2563eb;
   color: white;
+  padding: 14px 32px;
   font-size: 18px;
+  font-weight: 600;
   border-radius: 8px;
-  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
 }
 
 .hero button:hover {
   background: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+}
+.hero button a {
+  text-decoration: none;
+
+  color: white;
+
+  padding: 12px 20px;
+
+  border-radius: 8px;
+
+  transition: 0.3s;
 }
 
 .about {
@@ -133,11 +187,12 @@ nav ul li a:hover {
 
 .skills {
   padding: 100px 80px;
-  background: #f5f5f5;
+  background: #111827;
   text-align: center;
 }
 
 .skills h2 {
+  color: white;
   font-size: 40px;
   margin-bottom: 50px;
 }
@@ -279,15 +334,21 @@ nav ul li a:hover {
 }
 
 .achievements {
-  padding: 100px 80px;
-
-  background: #f9fafb;
+  padding: 80px 80px 0 80px; /* Remove bottom padding to let the gradient blend */
+  background: #ffffff;
+  position: relative;
+}
+.achievement-fade-bridge {
+  height: 100px;
+  background: linear-gradient(to bottom, #ffffff, #0f172a);
+  width: 100%;
 }
 
 .achievements h2 {
   text-align: center;
   font-size: 40px;
   margin-bottom: 70px;
+  color: black;
 }
 .timeline {
   position: relative;
@@ -334,13 +395,11 @@ nav ul li a:hover {
   border: 5px solid white;
 }
 .timeline-content {
-  background: white;
-
-  padding: 30px;
-
-  border-radius: 15px;
-
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  background: #f8fafc; /* Sleek, very light gray-blue so it pops on pure white */
+  padding: 35px;
+  border-radius: 18px;
+  border: 1px solid #e2e8f0; /* Subtle boundary line */
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05); /* Softer, dark slate shadow */
 }
 .date {
   color: #2563eb;
@@ -441,86 +500,77 @@ nav ul li a:hover {
   cursor: pointer;
 }
 .contact {
-  padding: 20px 80px;
-
-  background: #111827;
-
-  color: white;
-
+  padding: 60px 80px; /* Increased vertical padding for better breathing room */
+  background: #0f172a; /* Deep, premium dark slate background */
+  color: #ffffff; /* Default text color is now crisp white */
   text-align: center;
 }
 
 .contact h2 {
   font-size: 40px;
-
   margin-bottom: 20px;
+  font-weight: 700;
+  color: #ffffff;
 }
 
 .contact-intro {
   max-width: 700px;
-
-  margin: auto;
-
+  margin: 0 auto 40px auto;
   line-height: 1.8;
-
-  color: #d1d5db;
-
-  margin-bottom: 30px;
+  color: #94a3b8; /* Soft, readable muted slate-gray instead of harsh solid gray */
+  font-size: 17px;
 }
 .contact-container {
   display: grid;
-
-  grid-template-columns: repeat(3, 1fr);
-
+  grid-template-columns: repeat(2, 1fr);
   gap: 30px;
-
-  margin-bottom: 20px;
+  margin-bottom: 40px;
+  max-width: 900px; /* Prevents the grid from stretching too wide on massive screens */
+  margin-left: auto;
+  margin-right: auto;
 }
 .contact-card {
-  background: #1f2937;
-
-  padding: 15px;
-
-  border-radius: 15px;
-
-  transition: 0.3s;
+  background: #1e293b; /* Slightly lighter card background so it looks "raised" */
+  padding: 25px; /* More padding inside the cards for a clean layout */
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05); /* Very subtle border for crisp definition */
+  transition: all 0.3s ease;
 }
+
 .contact-card:hover {
   transform: translateY(-8px);
+  background: #243249; /* Smoothly lights up the card slightly on hover */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); /* Adds a deep drop shadow */
 }
 .social-links {
   display: flex;
-
   justify-content: center;
-
-  gap: 10px;
+  gap: 15px; /* Slightly wider gap */
 }
 .social-links a {
   text-decoration: none;
-
-  color: white;
-
-  background: #2563eb;
-
-  padding: 10px 20px;
-
+  color: #ffffff;
+  background: #2563eb; /* Matches your core brand blue */
+  padding: 12px 24px;
   border-radius: 8px;
-
-  transition: 0.3s;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
 }
 .social-links a:hover {
-  background: #1d4ed8;
+  background: #1d4ed8; /* Darker blue on hover */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
 }
 footer {
-  background: #0f172a;
-
-  color: #aaa;
-
-  padding: 10px;
-
+  background: #020617; /* Strong, grounded midnight-black anchor */
+  color: #64748b; /* Muted text so it doesn't distract from the main content */
+  padding: 25px 10px; /* Better vertical breathing room */
   text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.05); /* Clean separator line */
 }
 
 footer p {
   margin: 5px;
+  font-size: 14px;
 }
