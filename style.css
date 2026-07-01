@@ -513,7 +513,9 @@ nav ul li a:hover {
 
 .contact-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  /* FIX: Tells the browser to automatically fit as many cards as possible, 
+     as long as they are at least 280px wide. No rigid column limits! */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 30px;
   margin-bottom: 40px;
   width: 100%;
@@ -539,6 +541,7 @@ nav ul li a:hover {
 .social-links {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap; /* FIX: Allows social buttons to cleanly wrap to a new line on narrow phone displays */
   gap: 15px;
 }
 
@@ -632,6 +635,11 @@ footer p {
     padding: 50px 20px; /* Reduced side padding on tiny screens */
   }
 
+  /* FIX: Adjust heading size for small viewports so the title looks proportional */
+  .contact h2 {
+    font-size: 32px;
+  }
+
   .hero h1 {
     font-size: 34px;
   }
@@ -646,8 +654,9 @@ footer p {
     text-align: center;
   }
 
-  .skills-grid,
-  .contact-container {
+  /* Note: .contact-container was removed from here because the new auto-fit rules 
+     above handle the column collapse fluidly on its own! */
+  .skills-grid {
     grid-template-columns: 1fr;
     gap: 20px;
   }
